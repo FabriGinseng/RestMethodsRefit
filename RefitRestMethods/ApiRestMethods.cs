@@ -22,12 +22,20 @@ namespace RefitMethods
     {
         private HttpClientHandler httpClientHandler { get; set; } = new HttpClientHandler();
         private RefitSettings settings = new RefitSettings(new NewtonsoftJsonContentSerializer());
-
+        private string authorizationHeaders;
         public ApiRestMethods()
         {
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, certificate, chain, sslPolicyErrors) => true;
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+        }
 
+        public ApiRestMethods(string usernameBasicAuth, string passwordBasicAuth)
+        {
+           Task.Run(async () =>
+           {
+                if (!string.IsNullOrWhiteSpace(usernameBasicAuth) && !string.IsNullOrWhiteSpace(passwordBasicAuth))
+                   authorizationHeaders = "Basic " + await returnBasicToken(usernameBasicAuth, passwordBasicAuth);
+           });
         }
 
         /// <summary>
@@ -46,11 +54,17 @@ namespace RefitMethods
         {
             try
             {
+                if (url == null)
+                    return new Response("Insert URL please");
+
                 var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
                     BaseAddress = url,
 
                 }, settings);
+
+                if (!string.IsNullOrWhiteSpace(authorizationHeaders))
+                    customHeaders.Add("Authorization", authorizationHeaders);
 
                 var i = await api.Create(request, customHeaders).ConfigureAwait(true);
                 return new Response(i);
@@ -62,7 +76,7 @@ namespace RefitMethods
             }
             catch (Exception errorGeneric)
             {
-                throw errorGeneric;
+                return new Response(errorGeneric);
             }
         }
 
@@ -79,12 +93,17 @@ namespace RefitMethods
         {
             try
             {
+                if (url == null)
+                    return new Response("Insert URL please");
 
-                var api = RestService.For<Irest<T,J, string>>(new HttpClient(handler: httpClientHandler)
+                var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
                     BaseAddress = url,
 
                 }, settings);
+
+                if (!string.IsNullOrWhiteSpace(authorizationHeaders))
+                    customHeaders.Add("Authorization", authorizationHeaders);
 
                 var i = await api.ReadAll(customHeaders).ConfigureAwait(true);
                 return new Response(i);
@@ -96,7 +115,7 @@ namespace RefitMethods
             }
             catch (Exception errorGeneric)
             {
-                throw errorGeneric;
+                return new Response(errorGeneric);
             }
         }
 
@@ -116,19 +135,27 @@ namespace RefitMethods
         {
             try
             {
+                if (url == null)
+                    return new Response("Insert URL please");
+
                 var uriBuilder = new UriBuilder(url);
                 var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+
                 foreach (KeyValuePair<string, string> querypar in queryParams)
                 {
                     query[querypar.Key] = querypar.Value;
                 }
                 uriBuilder.Query = query.ToString();
                 var longurl = uriBuilder.ToString();
-                var api = RestService.For<Irest<T,J, string>>(new HttpClient(handler: httpClientHandler)
+
+                var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
                     BaseAddress = new Uri(longurl),
 
                 }, settings);
+
+                if (!string.IsNullOrWhiteSpace(authorizationHeaders))
+                    customHeaders.Add("Authorization", authorizationHeaders);
 
                 var i = await api.ReadAll(customHeaders).ConfigureAwait(true);
                 return new Response(i);
@@ -140,7 +167,7 @@ namespace RefitMethods
             }
             catch (Exception errorGeneric)
             {
-                throw errorGeneric;
+                return new Response(errorGeneric);
             }
         }
 
@@ -163,6 +190,8 @@ namespace RefitMethods
         {
             try
             {
+                if (url == null)
+                    return new Response("Insert URL please");
                 var uriBuilder = new UriBuilder(url);
                 var query = HttpUtility.ParseQueryString(uriBuilder.Query);
                 foreach (KeyValuePair<string, string> querypar in queryParams)
@@ -171,11 +200,14 @@ namespace RefitMethods
                 }
                 uriBuilder.Query = query.ToString();
                 var longurl = uriBuilder.ToString();
-                var api = RestService.For<Irest<T,J, string>>(new HttpClient(handler: httpClientHandler)
+                var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
                     BaseAddress = new Uri(longurl),
 
                 }, settings);
+
+                if (!string.IsNullOrWhiteSpace(authorizationHeaders))
+                    customHeaders.Add("Authorization", authorizationHeaders);
 
                 var i = await api.Create(request, customHeaders).ConfigureAwait(true);
                 return new Response(i);
@@ -187,7 +219,7 @@ namespace RefitMethods
             }
             catch (Exception errorGeneric)
             {
-                throw errorGeneric;
+                return new Response(errorGeneric);
             }
         }
 
@@ -210,6 +242,12 @@ namespace RefitMethods
         {
             try
             {
+                if (url == null)
+                    return new Response("Insert URL please");
+
+                if (!string.IsNullOrWhiteSpace(authorizationHeaders))
+                    customHeaders.Add("Authorization", authorizationHeaders);
+
                 if (queryParams != null && queryParams.Count > 0)
                 {
                     var uriBuilder = new UriBuilder(url);
@@ -220,7 +258,7 @@ namespace RefitMethods
                     }
                     uriBuilder.Query = query.ToString();
                     var longurl = uriBuilder.ToString();
-                    var api = RestService.For<Irest<T,J, string>>(new HttpClient(handler: httpClientHandler)
+                    var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                     {
                         BaseAddress = new Uri(longurl),
 
@@ -230,11 +268,12 @@ namespace RefitMethods
                 }
                 else
                 {
-                    var api = RestService.For<Irest<T,J, string>>(new HttpClient(handler: httpClientHandler)
+                    var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                     {
                         BaseAddress = url,
 
                     }, settings);
+
                     var i = await api.Create(request, customHeaders).ConfigureAwait(true);
                     return new Response(i);
 
@@ -246,7 +285,7 @@ namespace RefitMethods
             }
             catch (Exception errorGeneric)
             {
-                throw errorGeneric;
+                return new Response(errorGeneric);
             }
         }
 
@@ -264,8 +303,13 @@ namespace RefitMethods
         {
             try
             {
+                if (url == null)
+                    return new Response("Insert URL please");
 
-                var api = RestService.For<Irest<T,J, string>>(new HttpClient(handler: httpClientHandler)
+                if (!string.IsNullOrWhiteSpace(authorizationHeaders))
+                    customHeaders.Add("Authorization", authorizationHeaders);
+
+                var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
                     BaseAddress = url,
 
@@ -281,8 +325,14 @@ namespace RefitMethods
             }
             catch (Exception errorGeneric)
             {
-                throw errorGeneric;
+                return new Response(errorGeneric);
             }
+        }
+
+        private async Task<string> returnBasicToken(string username, string password)
+        {
+            var byteText = System.Text.Encoding.UTF8.GetBytes(username + ":" + password);
+            return Convert.ToBase64String(byteText);
         }
 
         /// <summary>
@@ -304,6 +354,18 @@ namespace RefitMethods
                 payload = obj.Content;
             }
 
+            internal Response(string obj)
+            {
+                statusCode = HttpStatusCode.NotAcceptable;
+                isSuccess = false;
+                message = obj;
+            }
+
+            internal Response(Exception obj)
+            {
+                isSuccess = false;
+                message = obj.Message;
+            }
             internal Response(ApiException obj)
             {
                 statusCode = obj.StatusCode;
