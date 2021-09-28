@@ -2,6 +2,10 @@
 
 The package will be used to simplify the use of http methods (PUT, POST, GET, DELETE) through the REFIT library
 
+# Build
+![example workflow](https://github.com/FabriGinseng/RestMethodsRefit/actions/workflows/dotnet.yml/badge.svg)
+![Nuget](https://img.shields.io/nuget/v/RefitRestMethodsPackage)
+
 ## How to use
 
 import the package:
