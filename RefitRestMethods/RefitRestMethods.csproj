@@ -4,12 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>RefitMethods</RootNamespace>
     <PackageId>RefitRestMethodsPackage</PackageId>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <Authors>Antonio Fabrizio Fiume - Alessio Rivoli</Authors>
     <Product>RefitRestMethods</Product>
     <Description>Il pacchetto sarà utilizzato per semplificare l'utilizzo dei metodi http (PUT, POST, GET, DELETE) attraverso la libreria REFIT</Description>
     <AssemblyName>RefitMethods</AssemblyName>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/FabriGinseng/RestMethodsRefit</PackageProjectUrl>
     <RepositoryUrl>https://github.com/FabriGinseng/RestMethodsRefit</RepositoryUrl>
     <PackageTags>refit; rest; api; post; put;delete;get;basic auth;</PackageTags>
     <Copyright>Antonio Fabrizio Fiume - Alessio Rivoli</Copyright>
