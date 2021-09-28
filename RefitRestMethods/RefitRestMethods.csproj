@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/FabriGinseng/RestMethodsRefit</RepositoryUrl>
     <PackageTags>refit; rest; api; post; put;delete;get;</PackageTags>
     <Copyright>Antonio Fabrizio Fiume - Alessio Rivoli</Copyright>
-    <PackageIcon>WhatsApp Image 2021-09-09 at 11.39.03.jpeg</PackageIcon>
+    <PackageIcon></PackageIcon>
     <PackageIconUrl />
   </PropertyGroup>
 
@@ -22,13 +22,6 @@
     <PackageReference Include="Refit" Version="6.0.94" />
     <PackageReference Include="Refit.HttpClientFactory" Version="6.0.94" />
     <PackageReference Include="Refit.Newtonsoft.Json" Version="6.0.94" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="C:\Users\Fabrizio\Downloads\WhatsApp Image 2021-09-09 at 11.39.03.jpeg">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
   </ItemGroup>
 
 </Project>
