@@ -15,6 +15,7 @@
     <Copyright>Antonio Fabrizio Fiume - Alessio Rivoli</Copyright>
     <PackageIcon></PackageIcon>
     <PackageIconUrl />
+    <ApplicationIcon>logoNuget.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
