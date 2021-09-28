@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>RefitMethods</RootNamespace>
     <PackageId>RefitRestMethodsPackage</PackageId>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <Authors>Antonio Fabrizio Fiume - Alessio Rivoli</Authors>
     <Product>RefitRestMethods</Product>
     <Description>Il pacchetto sarà utilizzato per semplificare l'utilizzo dei metodi http (PUT, POST, GET, DELETE) attraverso la libreria REFIT</Description>
