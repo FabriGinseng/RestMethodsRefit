@@ -20,6 +20,9 @@ Instance the variables:
 //left parameter is how do you want serialize the Object that you send to the server (RequestClass) 
 //and in the right there is how do you want to deserialize the Object that the server send to the client (ResponseClass)
 ApiRestMethods<RequestClass, ResponseClass> rest = new ApiRestMethods<RequestClass, ResponseClass>();
+
+//if you use basic auth add username and password
+ApiRestMethods<RequestClass, ResponseClass> rest = new ApiRestMethods<RequestClass, ResponseClass>(username,password);
 ```
 
 POST METHOD:
