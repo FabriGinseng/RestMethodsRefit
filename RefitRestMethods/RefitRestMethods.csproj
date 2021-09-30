@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>RefitMethods</RootNamespace>
     <PackageId>RefitRestMethodsPackage</PackageId>
-    <Version>1.0.7</Version>
+    <Version>1.0.8</Version>
     <Authors>Antonio Fabrizio Fiume - Alessio Rivoli</Authors>
     <Product>RefitRestMethods</Product>
     <Description>Il pacchetto sarà utilizzato per semplificare l'utilizzo dei metodi http (PUT, POST, GET, DELETE) attraverso la libreria REFIT</Description>
@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/FabriGinseng/RestMethodsRefit</RepositoryUrl>
     <PackageTags>refit; rest; api; post; put;delete;get;basic auth;</PackageTags>
     <Copyright>Antonio Fabrizio Fiume - Alessio Rivoli</Copyright>
-    <PackageIcon></PackageIcon>
+    <PackageIcon>logoNuget.jpeg</PackageIcon>
     <PackageIconUrl />
     <ApplicationIcon>logoNuget.ico</ApplicationIcon>
   </PropertyGroup>
@@ -23,6 +23,13 @@
     <PackageReference Include="Refit" Version="6.0.94" />
     <PackageReference Include="Refit.HttpClientFactory" Version="6.0.94" />
     <PackageReference Include="Refit.Newtonsoft.Json" Version="6.0.94" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="logoNuget.jpeg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
