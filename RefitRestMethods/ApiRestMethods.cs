@@ -80,6 +80,51 @@ namespace RefitMethods
             }
         }
 
+
+        /// <summary>
+        /// The method send data in json format to a server to create/update a resource.
+        /// </summary>
+        /// <param name="request"> 
+        /// Is the object that the method send to the server
+        /// </param>
+        /// <param name="url">
+        /// Is the uniform resource locator
+        /// </param>
+        /// <param name="customHeaders">
+        /// header's list 
+        /// </param>
+        public async Task<Response> PostUrlEncodedMethod(Dictionary<string,object> request, Uri url, Dictionary<string, string> customHeaders = null)
+        {
+            try
+            {
+                if (url == null)
+                    return new Response("Insert URL please");
+
+                var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
+                {
+                    BaseAddress = url,
+
+                }, settings);
+
+                if (!string.IsNullOrWhiteSpace(authorizationHeaders))
+                    customHeaders.Add("Authorization", authorizationHeaders);
+
+                var i = await api.CreateEncoded(request, customHeaders).ConfigureAwait(true);
+                return new Response(i);
+
+            }
+            catch (ApiException apiException)
+            {
+                return new Response(apiException);
+            }
+            catch (Exception errorGeneric)
+            {
+                return new Response(errorGeneric);
+            }
+        }
+
+
+
         /// <summary>
         /// The method retrieve data in json format from server.
         /// </summary>

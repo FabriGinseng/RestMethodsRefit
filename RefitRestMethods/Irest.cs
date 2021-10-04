@@ -26,7 +26,7 @@ namespace RefitMethods
         /// <param name="payload"></param>
         /// <param name="headers"></param>
         [Post("")]
-        Task<ApiResponse<J>> CreateEncoded([Body(BodySerializationMethod.UrlEncoded)] T payload, [HeaderCollection] IDictionary<string, string> headers);
+        Task<ApiResponse<J>> CreateEncoded([Body(BodySerializationMethod.UrlEncoded)] Dictionary<string,object> payload, [HeaderCollection] IDictionary<string, string> headers);
 
         /// <summary>
         /// This method accepts one parameter, Headers
