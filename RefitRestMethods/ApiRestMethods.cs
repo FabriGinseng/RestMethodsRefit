@@ -64,7 +64,8 @@ namespace RefitMethods
                 }, settings);
 
                 if (!string.IsNullOrWhiteSpace(authorizationHeaders))
-                    customHeaders.Add("Authorization", authorizationHeaders);
+                    if (customHeaders != null)
+                        customHeaders.Add("Authorization", authorizationHeaders);
 
                 var i = await api.Create(request, customHeaders).ConfigureAwait(true);
                 return new Response(i);
@@ -107,7 +108,8 @@ namespace RefitMethods
                 }, settings);
 
                 if (!string.IsNullOrWhiteSpace(authorizationHeaders))
-                    customHeaders.Add("Authorization", authorizationHeaders);
+                    if (customHeaders != null)
+                        customHeaders.Add("Authorization", authorizationHeaders);
 
                 var i = await api.CreateEncoded(request, customHeaders).ConfigureAwait(true);
                 return new Response(i);
@@ -148,7 +150,8 @@ namespace RefitMethods
                 }, settings);
 
                 if (!string.IsNullOrWhiteSpace(authorizationHeaders))
-                    customHeaders.Add("Authorization", authorizationHeaders);
+                    if (customHeaders != null)
+                        customHeaders.Add("Authorization", authorizationHeaders);
 
                 var i = await api.ReadAll(customHeaders).ConfigureAwait(true);
                 return new Response(i);
@@ -182,27 +185,18 @@ namespace RefitMethods
             {
                 if (url == null)
                     return new Response("Insert URL please");
-
-                var uriBuilder = new UriBuilder(url);
-                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-
-                foreach (KeyValuePair<string, string> querypar in queryParams)
-                {
-                    query[querypar.Key] = querypar.Value;
-                }
-                uriBuilder.Query = query.ToString();
-                var longurl = uriBuilder.ToString();
+                
 
                 var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
-                    BaseAddress = new Uri(longurl),
-
+                    BaseAddress = url
                 }, settings);
 
                 if (!string.IsNullOrWhiteSpace(authorizationHeaders))
-                    customHeaders.Add("Authorization", authorizationHeaders);
+                    if (customHeaders != null)
+                        customHeaders.Add("Authorization", authorizationHeaders);
 
-                var i = await api.ReadAll(customHeaders).ConfigureAwait(true);
+                var i = await api.ReadAllQuery(customHeaders, queryParams).ConfigureAwait(true);
                 return new Response(i);
 
             }
@@ -252,7 +246,8 @@ namespace RefitMethods
                 }, settings);
 
                 if (!string.IsNullOrWhiteSpace(authorizationHeaders))
-                    customHeaders.Add("Authorization", authorizationHeaders);
+                    if (customHeaders != null)
+                        customHeaders.Add("Authorization", authorizationHeaders);
 
                 var i = await api.Create(request, customHeaders).ConfigureAwait(true);
                 return new Response(i);
@@ -291,7 +286,8 @@ namespace RefitMethods
                     return new Response("Insert URL please");
 
                 if (!string.IsNullOrWhiteSpace(authorizationHeaders))
-                    customHeaders.Add("Authorization", authorizationHeaders);
+                    if (customHeaders != null)
+                        customHeaders.Add("Authorization", authorizationHeaders);
 
                 if (queryParams != null && queryParams.Count > 0)
                 {
@@ -352,7 +348,8 @@ namespace RefitMethods
                     return new Response("Insert URL please");
 
                 if (!string.IsNullOrWhiteSpace(authorizationHeaders))
-                    customHeaders.Add("Authorization", authorizationHeaders);
+                    if (customHeaders != null)
+                        customHeaders.Add("Authorization", authorizationHeaders);
 
                 var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {

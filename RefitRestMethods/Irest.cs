@@ -37,6 +37,15 @@ namespace RefitMethods
         Task<ApiResponse<J>> ReadAll([HeaderCollection] IDictionary<string, string> headers);
 
         /// <summary>
+        /// This method accepts two parameter, Headers and queryParams
+        /// </summary>
+        /// <param name="headers"></param>
+        /// <param name="queryParams"></param>
+        /// <returns></returns>
+        [Get("")]
+        Task<ApiResponse<J>> ReadAllQuery([HeaderCollection] IDictionary<string, string> headers, IDictionary<string, string> queryParams);
+
+        /// <summary>
         /// This method accepts two parameters, payload and headers 
         /// </summary>
         /// <param name="payload"></param>
