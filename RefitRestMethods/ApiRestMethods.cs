@@ -214,7 +214,7 @@ namespace RefitMethods
         /// The method send data in json format to a server to create/update a resource. In additional the client can send query params
         /// </summary>
         /// <param name="queryParams">
-        /// list of params <key,value>
+        /// Object query params refit Alias
         /// </param>
         /// <param name="request"> 
         /// Is the object that the method send to the server
@@ -225,31 +225,21 @@ namespace RefitMethods
         /// <param name="customHeaders">
         /// header's list 
         /// </param>
-        public async Task<Response> PostQueryMethod(T request, Dictionary<string, string> queryParams, Uri url, Dictionary<string, string> customHeaders = null)
+        public async Task<Response> PostQueryMethod(T request, Object queryParams, Uri url, Dictionary<string, string> customHeaders = null)
         {
             try
             {
                 if (url == null)
                     return new Response("Insert URL please");
-                var uriBuilder = new UriBuilder(url);
-                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-                foreach (KeyValuePair<string, string> querypar in queryParams)
-                {
-                    query[querypar.Key] = querypar.Value;
-                }
-                uriBuilder.Query = query.ToString();
-                var longurl = uriBuilder.ToString();
                 var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
-                    BaseAddress = new Uri(longurl),
-
+                    BaseAddress = url,
                 }, settings);
 
                 if (!string.IsNullOrWhiteSpace(authorizationHeaders))
-                    if (customHeaders != null)
-                        customHeaders.Add("Authorization", authorizationHeaders);
+                    customHeaders.Add("Authorization", authorizationHeaders);
 
-                var i = await api.Create(request, customHeaders).ConfigureAwait(true);
+                var i = await api.CreateQuery(request, queryParams, customHeaders).ConfigureAwait(true);
                 return new Response(i);
 
             }

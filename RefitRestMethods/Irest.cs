@@ -20,6 +20,16 @@ namespace RefitMethods
         [Post("")]
         Task<ApiResponse<J>> Create([Body] T payload, [HeaderCollection] IDictionary<string, string> headers);
 
+
+        /// <summary>
+        /// This method accepts three parameters, payload, headers and queryparams 
+        /// </summary>
+        /// <param name="payload"></param>
+        /// <param name="headers"></param>
+        /// <param name="queryParams"></param>
+        [Post("")]
+        Task<ApiResponse<J>> CreateQuery([Body] T payload, [Query] object queryParams, [HeaderCollection] IDictionary<string, string> headers);
+
         /// <summary>
         /// This method accepts three parameters, payload that it will be modify in url encoded query, headers. The method return a object (json)
         /// </summary>
