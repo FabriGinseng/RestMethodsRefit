@@ -384,6 +384,7 @@ namespace RefitMethods
                 isSuccess = obj.IsSuccessStatusCode;
                 message = obj.ReasonPhrase;
                 payload = obj.Content;
+                error = obj.Error;
             }
 
             internal Response(string obj)
