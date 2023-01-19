@@ -1,4 +1,4 @@
-﻿using Refit;
+using Refit;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -45,6 +45,13 @@ namespace RefitMethods
         /// <returns></returns>
         [Get("")]
         Task<ApiResponse<J>> ReadAll([HeaderCollection] IDictionary<string, string> headers);
+
+
+        /// <param name="queryParams"></param>
+        /// <param name="headers"></param>
+        /// <returns></returns>
+        [Get("")]
+        Task<ApiResponse<J>> ReadQuery([Query] object queryParams, [HeaderCollection] IDictionary<string, string> headers);
 
         /// <summary>
         /// This method accepts two parameter, Headers and queryParams
