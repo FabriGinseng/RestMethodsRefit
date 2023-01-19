@@ -1,4 +1,4 @@
-﻿using Refit;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -179,7 +179,7 @@ namespace RefitMethods
         /// <param name="customHeaders">
         /// header's list 
         /// </param>
-        public async Task<Response> GetQueryMethod(Dictionary<string, string> queryParams, Uri url, Dictionary<string, string> customHeaders = null)
+        public async Task<Response> GetQueryMethod(Object queryParams, Uri url, Dictionary<string, string> customHeaders = null)
         {
             try
             {
@@ -196,7 +196,7 @@ namespace RefitMethods
                     if (customHeaders != null)
                         customHeaders.Add("Authorization", authorizationHeaders);
 
-                var i = await api.ReadAllQuery(customHeaders, queryParams).ConfigureAwait(true);
+                var i = await api.ReadQuery(queryParams,customHeaders).ConfigureAwait(true);
                 return new Response(i);
 
             }
