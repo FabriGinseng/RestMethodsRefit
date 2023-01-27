@@ -60,6 +60,7 @@ namespace RefitMethods
                 var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
                     BaseAddress = url,
+                    Timeout = TimeSpan.FromSeconds(180)
 
                 }, settings);
 
@@ -104,6 +105,8 @@ namespace RefitMethods
                 var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
                     BaseAddress = url,
+                    Timeout = TimeSpan.FromSeconds(180)
+
 
                 }, settings);
 
@@ -146,6 +149,7 @@ namespace RefitMethods
                 var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
                     BaseAddress = url,
+                    Timeout = TimeSpan.FromSeconds(180)
 
                 }, settings);
 
@@ -189,7 +193,9 @@ namespace RefitMethods
 
                 var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
-                    BaseAddress = url
+                    BaseAddress = url,
+                    Timeout = TimeSpan.FromSeconds(180)
+
                 }, settings);
 
                 if (!string.IsNullOrWhiteSpace(authorizationHeaders))
@@ -234,6 +240,7 @@ namespace RefitMethods
                 var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
                     BaseAddress = url,
+                    Timeout = TimeSpan.FromSeconds(180)
                 }, settings);
 
                 if (!string.IsNullOrWhiteSpace(authorizationHeaders))
@@ -292,6 +299,7 @@ namespace RefitMethods
                     var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                     {
                         BaseAddress = new Uri(longurl),
+                    Timeout = TimeSpan.FromSeconds(180)
 
                     }, settings);
                     var i = await api.Update(request, customHeaders).ConfigureAwait(true);
@@ -302,6 +310,7 @@ namespace RefitMethods
                     var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                     {
                         BaseAddress = url,
+                    Timeout = TimeSpan.FromSeconds(180)
 
                     }, settings);
 
@@ -344,6 +353,7 @@ namespace RefitMethods
                 var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
                 {
                     BaseAddress = url,
+                    Timeout = TimeSpan.FromSeconds(180)
 
                 }, settings);
 
