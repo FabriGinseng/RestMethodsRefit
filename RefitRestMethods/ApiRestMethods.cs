@@ -170,7 +170,53 @@ namespace RefitMethods
                 return new Response(errorGeneric);
             }
         }
+        
+        
+        
+        /// <summary>
+        /// The method retrieve data in json format from server, the client send a query string in the path.
+        /// </summary>
+        /// <param name="queryParams">
+        /// the params that will be add in url
+        /// </param>
+        /// <param name="url">
+        /// Is the uniform resource locator
+        /// </param>
+        /// <param name="customHeaders">
+        /// header's list 
+        /// </param>
+        public async Task<Response> GetQueryDictionaryMethod(Dictionary<string, string> queryParams, Uri url, Dictionary<string, string> customHeaders = null)
+        {
+            try
+            {
+                if (url == null)
+                    return new Response("Insert URL please");
+                
 
+                var api = RestService.For<Irest<T, J, string>>(new HttpClient(handler: httpClientHandler)
+                {
+                    BaseAddress = url
+                }, settings);
+
+                if (!string.IsNullOrWhiteSpace(authorizationHeaders))
+                    if (customHeaders != null)
+                        customHeaders.Add("Authorization", authorizationHeaders);
+
+                var i = await api.ReadAllQuery(customHeaders, queryParams).ConfigureAwait(true);
+                return new Response(i);
+
+            }
+            catch (ApiException apiException)
+            {
+                return new Response(apiException);
+            }
+            catch (Exception errorGeneric)
+            {
+                return new Response(errorGeneric);
+            }
+        }
+        
+        
         /// <summary>
         /// The method retrieve data in json format from server, the client send a query string in the path.
         /// </summary>
