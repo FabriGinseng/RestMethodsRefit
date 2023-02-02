@@ -185,7 +185,7 @@ namespace RefitMethods
         /// <param name="customHeaders">
         /// header's list 
         /// </param>
-        public async Task<Response> GetQueryDictionaryMethod(Dictionary<string, string> queryParams, Uri url, Dictionary<string, string> customHeaders = null)
+        public async Task<Response> GetQueryDictionaryMethod(NameValueCollection queryParams, Uri url, Dictionary<string, string> customHeaders = null)
         {
             try
             {
