@@ -1,7 +1,7 @@
 using Refit;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Collections.Specialized;
 namespace RefitMethods
 {
     /// <summary>
@@ -60,7 +60,7 @@ namespace RefitMethods
         /// <param name="queryParams"></param>
         /// <returns></returns>
         [Get("")]
-        Task<ApiResponse<J>> ReadAllQuery([HeaderCollection] IDictionary<string, string> headers, IDictionary<string, string> queryParams);
+        Task<ApiResponse<J>> ReadAllQuery([HeaderCollection] IDictionary<string, string> headers, NameValueCollection  queryParams);
 
         /// <summary>
         /// This method accepts two parameters, payload and headers 
